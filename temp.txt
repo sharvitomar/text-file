@@ -1,57 +1,16 @@
-Insights to modeling COVID-19 epidemic using new labels
-What’s missing in SIR and SEIR models?
+Technology firms including Microsoft have tried to disrupt a cybercriminal group whose malicious software has been used in ransomware attacks and other hacks around the world, the companies said Wednesday.
 
-Modeling in epidemiology is performed using compartment models that assign labels to all the people. These labels can be considered as states in a state machine, and the entire population is assigned different categories. A prevalent compartment model used to model COVID-19 is the SIR model (Susceptible-Infected-Recovered). The SIR model uses a set of equations (ODEs) to compute people who are susceptible, infected, and who have recovered at a given time. The SIR model is bounded because it considers that all the people who contract the infection get infected (or show symptoms) instantly. This is not the case with coronavirus disease in which the symptoms start to show at different times for different individuals. SEIR (Susceptible-Exposed-Infected-Recovered) model, which is a variant of SIR, also can’t be used to accurately model COVID-19 since it is based on the assumption that every infected individual is reported. There are multiple reasons why there will be infected people who would go unreported such as lack of testing facilities, unawareness, etc.
-The article will explain the SIRU (Susceptible-Infected-Reported-Unreported) model, which overcomes the drawbacks of the SIR and SEIR models through its employment on the COVID-19 epidemic. Additionally, this article focuses on analyzing the effects of public health organizations’ interventions like isolation and lockdown as well as aggressive testing in different countries. My article is inspired by the works in [1] and [2] in which the SIRU model has been proposed for epidemic modeling along with methods to approximate its parameters.
-SIRU (Susceptible-Infected-Reported-Unreported)
-It is a compartment model used in epidemiology which specializes in incorporating the unreported cases of infectious individuals in modeling and thus, capturing the effects of public testing. The effects of social distancing can also be accommodated by the model.
+The effort included a court order from the US District Court for the Northern District of Georgia that allowed Microsoft (MSFT) to seize 65 internet domains used by the hacking group behind widely used malware known as ZLoader, Microsoft said.
 
-Figure 1: SIRU Flow diagram
-The model consists of the following system of ordinary differential equations:
+Since surfacing in 2019, ZLoader has been used in an array of financially motivated hacking schemes — many of them aimed at organizations in North America. The hackers have also been involved in a tool for deploying a type of ransomware that has to be used in hacks against health care organizations, according to Microsoft.
 
+Microsoft said it identified one of the people involved in the hacking enterprise and that it referred information to law enforcement authorities.
+The US Justice Department did not respond to a request for comment.
 
-Estimating Parameters
-We utilize the data of confirmed cases to identify the values of parameters τ, ν, ν₁, ν₂, η, as well as the initial conditions S(t₀), I(t₀), and U(t₀).
-We assume that the cumulative reported symptomatic infectious cases at time t, CR(t), consist of a constant fraction of the total number of symptomatic infectious cases up to time t. And since ν₁ is the removal rate of reported symptomatic infectious individuals, CR(t) is denoted by:
+Other cybersecurity firms involved in the takedown included US companies Lumen and Palo Alto Networks, and Slovakia-based ESET.
 
-Assuming that in the initial phase of epidemic, the cumulative reported symptomatic infectious cases grows exponentially
+It's just the latest corporate or government effort to dismantle computer infrastructure, which is often registered in the United States, used by cybercriminals or intelligence operatives.
+Microsoft said last week that it had used another court order to disable seven internet domains that a hacking group linked with Russian intelligence was using in a likely effort to support Russia's war in Ukraine.
 
-By fitting this curve with the reported case data, we obtain the values of χ₁, χ₂ and χ₃.
-Experiment
-We use the dataset provided on Kaggle (Novel Corona Virus 2019 Dataset). Taking the case of Spain, we set the value of S₀ as the total population of Spain, S₀= 46,900,000. Then we ﬁx ν, η, f as per the initial findings, ѵ=1/7, η=1/7 and f = 0.8. Figure 2 shows the plot of the curve fitted to coronavirus cases for first 45 days.
-
-Figure 2: Plot showing curve fitted for first 45 days of coronavirus cases in Spain
-The fitted curve provided us with χ1, χ2, and -χ3, which are 0.01920, 0.29338, and -36.47589 respectively. This curve helps us in:
-Obtaining the starting time of the epidemic, t₀
-Obtaining the initial number of asymptomatic infected individuals, I₀
-Obtaining the initial number of symptomatic unreported individuals, U₀
-Obtaining the rate of transmission, τ
-
-For detailed derivation, refer to the Appendix at the end.
-Using the above calculated values, plotting CR(t) from Equation (3), R(t) from Equation (1c) and U(t) from Equation (1d) in Figure-3 (left).
-Since the transmission rate (τ) decreases through lockdown, and social distancing and the fraction of infectious individuals that become reported (f) increases with aggressive testing, considering parameters τ and f as time variable coefficients τ(t) and f(t) can be very useful in interpreting the effects of public health measures.
-Assuming that τ becomes 0 on the strict imposition of lockdown by the state on t=N₁.
-
-Also, assuming that after the adoption of aggressive testing in the state at t= N₂, f increases to 0.9.
-
-In the case of Spain, we take N₁=N₂= 76 days (lockdown started from March 14, so assuming the transmission rate to become 0 from March 16). Plotting CR(t) from (3), R(t) from (1c) and U(t) from (1d) in Figure-3 (right).
-
-Figure 3: Spain experiment
-Spain’s public health measures with nation-wide lockdown from March 14 did not have much effect in controlling the epidemic. The turning point, the time at which R(t) reaches its maximum value, has not come down from 66 days. The country has reported the second highest number of cases in the world. [3]
-Now, let’s consider comparing the scenarios of various countries.
-Assumptions for the experiments below: The rate of transmission becomes 0 two days after the announced lockdown. The value of f which increases with testing is also assumed to change from 0.8 to 0.9 after two days of the lockdown. In the case of South Korea where the government declared “red level” alert but no lockdowns, similar changes to transmission rate and f are assumed two days following the announcement of “red level” alert.
-
-Figure 4: South Korea experiment
-South Korea’s measure to contain the spread of the virus included aggressive testing strategies and heavy reliance on mobile apps that helped decrease transmission of the infection by assisting people in avoiding coming in contact with the positive cases. Having faced a similar crisis in 2015 (MERS — Middle East Respiratory Syndrome), the people were vigilant in taking precautions after the government announced a “red level” alert on February 23. This has helped South Korea to bring down the turning point by 14 days.
-
-Figure 5: Germany experiment
-Germany’s wide-scale testing and national curfew from March 22 although reduced the magnitude of the epidemic but did not bring about a change in its turning point.
-
-Figure 6: Italy experiment
-Italy’s public health measures by the state brought down the turning point by 20 days as well as reduced the size of the epidemic.
-
-Figure 7: Hubei experiment
-Attributing to effective public health measures such as strict lockdowns from January 23 and increased testing, the turning point has come down from 138 days to 28 days, and the size of the COVID-19 epidemic has drastically reduced in the case of Hubei province in China.
-
-Conclusion
-Through the SIRU model, I have tried to compare the effects of public health measures to contain the spread of coronavirus in different parts of the world. In addition, I have incorporated the increase in reported cases through aggressive virus testing by authorities and, thus, capturing the unreported cases. The effects of this measure are not reflected in other compartment models like SIR and its different variants.
+The actions are far from fatal blows to the hacking groups, but it's an important effort to make it harder for them to operate.
+"Each time we have a successful takedown like this, we increase the cost for them to do business and set the example for their successors that there is increased risk associated with their malicious activities," said Wendi Whitmore, head of Palo Alto Network's Unit 42 threat intelligence section.
